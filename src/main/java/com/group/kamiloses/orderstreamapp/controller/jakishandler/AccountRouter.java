@@ -13,7 +13,9 @@ public class AccountRouter {
 
 @Bean
     public RouterFunction<ServerResponse> routerFunction(AccountHandler accountHandler){
-    return RouterFunctions.route().POST("/account",accountHandler::createAccount).build();
+    return RouterFunctions.route().POST("/account",accountHandler::createAccount)
+            .DELETE("/account",accountHandler::removeAccount)
+            .build();
 
 
 }

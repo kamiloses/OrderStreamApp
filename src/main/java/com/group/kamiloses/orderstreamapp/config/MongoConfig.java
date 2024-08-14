@@ -1,4 +1,4 @@
-package com.group.kamiloses.orderstreamapp;
+package com.group.kamiloses.orderstreamapp.config;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;

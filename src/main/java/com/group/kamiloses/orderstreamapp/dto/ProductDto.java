@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ProductDto {
     private String id;
     private String name;
-    private String description;
     private double price;
     private int stock;
 
