@@ -1,4 +1,4 @@
-package com.group.kamiloses.orderstreamapp.config.exception;
+package com.group.kamiloses.orderstreamapp.exception;
 
 public class EmailAlreadyExistsException extends RuntimeException{
 

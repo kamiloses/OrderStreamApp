@@ -1,6 +1,6 @@
-package com.group.kamiloses.orderstreamapp.controller.jakishandler;
+package com.group.kamiloses.orderstreamapp.handler;
 
-import com.group.kamiloses.orderstreamapp.config.exception.InvalidFieldException;
+import com.group.kamiloses.orderstreamapp.exception.InvalidFieldException;
 import com.group.kamiloses.orderstreamapp.dto.UserDto;
 import com.group.kamiloses.orderstreamapp.service.AccountService;
 import org.springframework.stereotype.Component;

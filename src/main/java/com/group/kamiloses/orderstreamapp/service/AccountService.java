@@ -1,15 +1,17 @@
 package com.group.kamiloses.orderstreamapp.service;
 
-import com.group.kamiloses.orderstreamapp.config.exception.EmailAlreadyExistsException;
-import com.group.kamiloses.orderstreamapp.config.exception.InvalidFieldException;
+import com.group.kamiloses.orderstreamapp.exception.EmailAlreadyExistsException;
+import com.group.kamiloses.orderstreamapp.exception.InvalidFieldException;
 import com.group.kamiloses.orderstreamapp.dto.UserDto;
-import com.group.kamiloses.orderstreamapp.entity.User;
+import com.group.kamiloses.orderstreamapp.entity.UserEntity;
 import com.group.kamiloses.orderstreamapp.repository.UserRepository;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import static com.group.kamiloses.orderstreamapp.entity.Role.*;
+import static com.group.kamiloses.orderstreamapp.other.Role.*;
 
 @Service
 public class AccountService {
@@ -20,7 +22,7 @@ public class AccountService {
         this.userRepository = userRepository;
     }
 
-    public Mono<User> createAccount(UserDto userDto) {
+    public Mono<UserEntity> createAccount(UserDto userDto) {
         return userRepository.save(userDtoToEntity(userDto));
     }
 
@@ -28,26 +30,13 @@ public class AccountService {
         return userRepository.deleteByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
     }
 
-
-    public UserDto userEntityToDto(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setRole(ROLE_USER);
-        userDto.setEmail(user.getEmail());
-        userDto.setPassword(user.getPassword());
-        return userDto;
-    }
-
-
-    public User userDtoToEntity(UserDto userDto) {
-        User userEntity = new User();
+    public UserEntity userDtoToEntity(UserDto userDto) {
+        UserEntity userEntity = new UserEntity();
         userEntity.setName(userDto.getName());
         userEntity.setRole(ROLE_USER);
         userEntity.setEmail(userDto.getEmail());
         userEntity.setPassword(userDto.getPassword());
         return userEntity;
-        //todo zrób tak żeby nie przyjmowało nulla
     }
 
 
@@ -75,11 +64,19 @@ public class AccountService {
 
 
     public Mono<Boolean> areFieldsMatchingAccount(UserDto userDto) {
-        //String email = SecurityContextHolder.getContext().getAuthentication().getName();//todo zamien potem
-        return userRepository.existsByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
-//todo wstaw za customerDto.getEmail()
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.existsByEmailAndPassword(email, userDto.getPassword());
 
 
     }
+
+    public Mono<UserEntity> getLoggedUserDetails(){
+
+        return ReactiveSecurityContextHolder.getContext()
+                .map(securityContext -> securityContext.getAuthentication().getName()).flatMap(userRepository::findUserByEmail);
+
+
+    }
+
 
 }

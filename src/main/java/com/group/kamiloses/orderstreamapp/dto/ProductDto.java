@@ -1,5 +1,6 @@
 package com.group.kamiloses.orderstreamapp.dto;
 
+import com.group.kamiloses.orderstreamapp.other.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    private String id;
-    private String name;
-    private double price;
-    private int stock;
+
+    private Product name;
 
 
 }

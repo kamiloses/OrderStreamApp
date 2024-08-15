@@ -1,7 +1,5 @@
-package com.group.kamiloses.orderstreamapp.controller.jakishandler;
+package com.group.kamiloses.orderstreamapp.exception;
 
-import com.group.kamiloses.orderstreamapp.config.exception.EmailAlreadyExistsException;
-import com.group.kamiloses.orderstreamapp.config.exception.InvalidFieldException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
