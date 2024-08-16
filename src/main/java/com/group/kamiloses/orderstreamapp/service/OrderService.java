@@ -7,6 +7,7 @@ import com.group.kamiloses.orderstreamapp.entity.ProductEntity;
 import com.group.kamiloses.orderstreamapp.other.Status;
 import com.group.kamiloses.orderstreamapp.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Date;
@@ -42,6 +43,26 @@ public class OrderService {
     }
 
 
+    public Flux<OrderEntity> getAllAvailableOrders() {
+        return orderRepository.findAll()
+                .filter(orderEntity -> !orderEntity.getStatus().equals(Status.SHIPPED));
+    }
+
+    public Mono<OrderEntity> modifyOrderStatus(String orderId) {
+        return orderRepository.findById(orderId).flatMap(orderEntity -> {
+                    if (orderEntity.getStatus().equals(Status.IN_PROGRESS)) {orderEntity.setStatus(Status.SHIPPED);}
+                       //invokeEmailSender;
+                    if (orderEntity.getStatus().equals(Status.ACCEPTED)) {
+                         //invokeEmailSender;
+                        orderEntity.setStatus(Status.IN_PROGRESS);}
+                    else return Mono.error(new IllegalStateException("Status cannot be changed"));
+                 return orderRepository.save(orderEntity);})
+                .switchIfEmpty(Mono.error(() -> new Exception("Order not found"))
+
+                );
+
+
+    }
 
 
 }

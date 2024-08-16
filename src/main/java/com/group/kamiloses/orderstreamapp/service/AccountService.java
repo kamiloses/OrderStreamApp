@@ -30,6 +30,7 @@ public class AccountService {
         return userRepository.deleteByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
     }
 
+
     public UserEntity userDtoToEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.setName(userDto.getName());
@@ -77,6 +78,15 @@ public class AccountService {
 
 
     }
+
+//    @PostConstruct
+//    public void addAdminAccount(){
+//        UserEntity user = new UserEntity(null,"admin", ROLE_ADMIN,"admin@@gmail.com","admin123");
+//
+// userRepository.save(user).subscribe();
+//
+//    }
+
 
 
 }

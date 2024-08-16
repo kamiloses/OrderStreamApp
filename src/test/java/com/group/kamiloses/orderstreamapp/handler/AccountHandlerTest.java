@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.*;
      @Test
      public void shouldCheckCreateAccountMethod(){
          UserEntity user = new UserEntity(null, "Kamil", ROLE_USER, "kamiloses@gmail.com", "kamil");
-         webTestClient.post().uri("/account").bodyValue(user).exchange().expectStatus().isOk();
+         webTestClient.post().uri("/createAccount").bodyValue(user).exchange().expectStatus().isOk();
 
 
 
@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
     @Test
     public void shouldThrowEmailAlreadyExistsEx(){
-        webTestClient.post().uri("/account").bodyValue(user).exchange().expectStatus().isBadRequest();
+        webTestClient.post().uri("/createAccount").bodyValue(user).exchange().expectStatus().isBadRequest();
 
 
     }

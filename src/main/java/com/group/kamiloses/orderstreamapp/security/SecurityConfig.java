@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -17,8 +18,13 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.csrf(ServerHttpSecurity.CsrfSpec::disable);
-    return http.authorizeExchange(exchange->exchange.pathMatchers("/account").permitAll()
-                    .anyExchange().authenticated()
+    return http.authorizeExchange(exchange->exchange.pathMatchers("/createAccount").permitAll()
+                    .pathMatchers("/removeAccount").authenticated()
+                    .pathMatchers("makeAnOrder").authenticated()
+                    .pathMatchers("/products").authenticated()
+                    .pathMatchers("/orders").hasRole("ADMIN")
+                    .pathMatchers("/modifyOrderStatus/**").hasRole("ADMIN")
+                    .anyExchange().denyAll()
             ).httpBasic(Customizer.withDefaults())
             .build();
 
