@@ -64,8 +64,8 @@ public class AccountService {
 
 
     public Mono<Boolean> areFieldsMatchingAccount(UserDto userDto) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.existsByEmailAndPassword(email, userDto.getPassword());
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();//
+        return userRepository.existsByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
 
 
     }
