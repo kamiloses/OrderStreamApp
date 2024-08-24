@@ -28,6 +28,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
      @Autowired
     UserRepository userRepository;
+
+
+
     List<UserEntity> allUsers = Arrays.asList(
             new UserEntity(null, "John", ROLE_USER, "John@gmail.com", "John123"),
             new UserEntity(null, "Adam", ROLE_USER, "Adam@gmail.com", "Adam123"));

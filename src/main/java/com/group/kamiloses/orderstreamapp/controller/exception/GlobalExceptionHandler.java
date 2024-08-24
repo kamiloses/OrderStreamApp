@@ -1,4 +1,4 @@
-package com.group.kamiloses.orderstreamapp.exception;
+package com.group.kamiloses.orderstreamapp.controller.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

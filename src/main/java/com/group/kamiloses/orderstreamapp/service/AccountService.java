@@ -1,10 +1,11 @@
 package com.group.kamiloses.orderstreamapp.service;
 
-import com.group.kamiloses.orderstreamapp.exception.EmailAlreadyExistsException;
-import com.group.kamiloses.orderstreamapp.exception.InvalidFieldException;
+import com.group.kamiloses.orderstreamapp.controller.exception.EmailAlreadyExistsException;
+import com.group.kamiloses.orderstreamapp.controller.exception.InvalidFieldException;
 import com.group.kamiloses.orderstreamapp.dto.UserDto;
 import com.group.kamiloses.orderstreamapp.entity.UserEntity;
 import com.group.kamiloses.orderstreamapp.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,7 @@ public class AccountService {
 
 
     public Mono<Boolean> areFieldsMatchingAccount(UserDto userDto) {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();//
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.existsByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
 
 
@@ -81,7 +82,7 @@ public class AccountService {
 
 //    @PostConstruct
 //    public void addAdminAccount(){
-//        UserEntity user = new UserEntity(null,"admin", ROLE_ADMIN,"admin@@gmail.com","admin123");
+//        UserEntity user = new UserEntity(null,"admin", ROLE_ADMIN,"admin@gmail.com","admin123");
 //
 // userRepository.save(user).subscribe();
 //

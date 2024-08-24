@@ -1,7 +1,7 @@
 package com.group.kamiloses.orderstreamapp.kafka;
 
 import com.group.kamiloses.orderstreamapp.entity.OrderEntity;
-import com.group.kamiloses.orderstreamapp.mailSender.EmailSenderService;
+import com.group.kamiloses.orderstreamapp.service.EmailSenderService;
 import com.group.kamiloses.orderstreamapp.other.Status;
 import com.group.kamiloses.orderstreamapp.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;

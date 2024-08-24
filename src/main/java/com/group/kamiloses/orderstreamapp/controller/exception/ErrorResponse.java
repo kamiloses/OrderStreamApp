@@ -1,4 +1,4 @@
-package com.group.kamiloses.orderstreamapp.exception;
+package com.group.kamiloses.orderstreamapp.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

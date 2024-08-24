@@ -55,10 +55,10 @@ public class OrderService {
 
     public Mono<Void> modifyOrderStatus(String orderId) {
         return orderRepository.findById(orderId)
-                .flatMap(kafkaProducer::sendMessage)
-                .switchIfEmpty(Mono.error(() -> new Exception("Order not found")));
-    }
+                        .flatMap(kafkaProducer::sendMessage);
+        //todo ogarnij by wyrzucało błąd jężeli ANI RAZU nie znajdzie id w bazie danych;
 
+    }
 
     }
 

@@ -23,14 +23,14 @@ public class KafkaTopicConfig {
         Map<String, Object> configs = new HashMap<>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapAddress);
 
-   return  new KafkaAdmin(configs);}//KafkaAdmin jest odpowiedzialny za to żeby te wszystkie beany typu NewTopic  zostały przekształcone w rzeczywiste topic w Kafka,pozwala tez na usuwanie topiców
+   return  new KafkaAdmin(configs);}
 
 
     @Bean
     public NewTopic orderStatusTopic(){
         return TopicBuilder.name("OrderStatusUpdate").
                 partitions(5).replicas(1)
-                .build();//tworze w ten sposób topic podczas uruchamiania aplikacji
+                .build();
 
 
     }
