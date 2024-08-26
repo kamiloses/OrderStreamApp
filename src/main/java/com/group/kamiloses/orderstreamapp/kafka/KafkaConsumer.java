@@ -4,6 +4,7 @@ import com.group.kamiloses.orderstreamapp.entity.OrderEntity;
 import com.group.kamiloses.orderstreamapp.service.EmailSenderService;
 import com.group.kamiloses.orderstreamapp.other.Status;
 import com.group.kamiloses.orderstreamapp.repository.OrderRepository;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -15,23 +16,23 @@ public class KafkaConsumer {
 
     private final OrderRepository orderRepository;
     private final EmailSenderService emailSenderService;
+    private OrderEntity recentlyConsumed;
 
     public KafkaConsumer(OrderRepository orderRepository, EmailSenderService emailSenderService) {
         this.orderRepository = orderRepository;
         this.emailSenderService = emailSenderService;
     }
 
-    @KafkaListener(topics = "OrderStatusUpdate",groupId = "order-status-group")
+    @KafkaListener(topics = "OrderStatusUpdate", groupId = "order-status-group")
 
-public void consumeMessage(OrderEntity orderEntity){
-consumeOrderEntity(orderEntity).subscribe();
-
-}
-
+    public void consumeMessage(OrderEntity orderEntity) {
+        consumeOrderEntity(orderEntity).subscribe();
+        this.recentlyConsumed = orderEntity;
+    }
 
 
     public Mono<OrderEntity> consumeOrderEntity(OrderEntity order) {
-       return orderRepository.findById(order.getId()).flatMap(orderEntity -> {
+        return orderRepository.findById(order.getId()).flatMap(orderEntity -> {
             log.info("Original status: {}", orderEntity.getStatus());
 
             if (orderEntity.getStatus().equals(Status.IN_PROGRESS)) {
@@ -51,7 +52,13 @@ consumeOrderEntity(orderEntity).subscribe();
                     .doOnError(error -> log.error("Error saving order", error));
         });
     }
-    }
+
+public String getRecentlyConsumed(){
+
+        return recentlyConsumed.toString();
+}
+
+}
 
 
 

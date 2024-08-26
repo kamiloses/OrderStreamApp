@@ -19,7 +19,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import reactor.core.publisher.Flux;
 
 @Configuration
-//@EnableBatchProcessing
 
 public class BatchConfig {
 //FlatFileItemReader do plików płaskich, JdbcCursorItemReader do baz danych, itp. Dzięki temu konfiguracja jest łatwa i elastyczna.
@@ -34,7 +33,6 @@ public class BatchConfig {
         this.jobRepository = jobRepository;
         this.transactionManager = transactionManager;
     }
-    //todo zamien na reactive transaction manager
 
 
 
