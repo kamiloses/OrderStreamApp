@@ -25,7 +25,7 @@ public class SecurityConfig {
                     .pathMatchers("/products").authenticated()
                     .pathMatchers("/orders").hasRole("ADMIN")
                     .pathMatchers("/modifyOrderStatus/**").hasRole("ADMIN")
-                    .anyExchange().denyAll()
+                    .anyExchange().permitAll()
             ).httpBasic(Customizer.withDefaults())
             .build();
 
