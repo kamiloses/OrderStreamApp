@@ -21,15 +21,15 @@ public class OrderStreamAppApplication {
         SpringApplication.run(OrderStreamAppApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner runJob(JobLauncher jobLauncher, Job processOrderJob) {
-
-        log.info("Job activated");
-        return args -> {
-            JobParameters jobParameters = new JobParametersBuilder()
-                    .addLong("startAt", System.currentTimeMillis())
-                    .toJobParameters();
-            jobLauncher.run(processOrderJob, jobParameters);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner runJob(JobLauncher jobLauncher, Job processOrderJob) {
+//
+//        log.info("Job activated");
+//        return args -> {
+//            JobParameters jobParameters = new JobParametersBuilder()
+//                    .addLong("startAt", System.currentTimeMillis())
+//                    .toJobParameters();
+//            jobLauncher.run(processOrderJob, jobParameters);
+//        };
+//    }
 }

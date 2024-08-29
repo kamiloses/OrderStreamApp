@@ -21,7 +21,6 @@ import reactor.core.publisher.Flux;
 @Configuration
 
 public class BatchConfig {
-//FlatFileItemReader do plików płaskich, JdbcCursorItemReader do baz danych, itp. Dzięki temu konfiguracja jest łatwa i elastyczna.
 //https://medium.com/@mbanaee61/building-a-reactive-spring-boot-application-with-mongodb-batch-processing-and-testcontainers-a-22ff13b42a86
 
     private final OrderRepository orderRepository;
@@ -44,7 +43,7 @@ public class BatchConfig {
 
     }
 
-    @Bean//processor added only for learning purpose
+    @Bean//processor added for learning purpose
     public OrderProcessor orderProcessor() {
 
 
@@ -65,7 +64,7 @@ public class BatchConfig {
 
 
         return new StepBuilder("processOrdersStep",jobRepository)
-                .<OrderEntity, OrderEntity>chunk(10,transactionManager)
+                .<OrderEntity, OrderEntity>chunk(3,transactionManager) //todo 10 chunk
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)

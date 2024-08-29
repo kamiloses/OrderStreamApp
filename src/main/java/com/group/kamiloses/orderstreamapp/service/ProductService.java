@@ -1,9 +1,7 @@
 package com.group.kamiloses.orderstreamapp.service;
 
 import com.group.kamiloses.orderstreamapp.entity.ProductEntity;
-import com.group.kamiloses.orderstreamapp.other.Product;
 import com.group.kamiloses.orderstreamapp.repository.ProductRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

@@ -61,7 +61,7 @@ class OrderHandlerTest {
                 .uri("/modifyOrderStatus/1").headers(httpHeaders -> httpHeaders.setBasicAuth("admin@gmail.com","admin123"))
                 .exchange()
                 .expectStatus().is5xxServerError();
-                //todo popraw potem by poprawnie status sie wyświetlał przy modyfikacji zamówienia
+                //todo popraw potem by poprawnie status sie wyświetlał przy modyfikacji zamówienia bo ogólnie transakcja sie udaje
     }
 
 
