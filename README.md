@@ -14,13 +14,13 @@ All requests
 
 ![image](https://github.com/user-attachments/assets/54894220-8285-478a-91d1-b28fc041ddc5)
 
+Frameworks/Libraries used:
 
-Frameworks/libraries which i used
--Reactive mongodb
--Project Reactor
--Spring batch
--Spring security
--Apache kafka
--Testcontainers for kafka
--Mysql(spring batch)
--JUnit
+- Reactive MongoDB
+- Project Reactor
+- Spring Batch
+- Spring Security
+- Apache Kafka
+- Testcontainers for Kafka
+- MySQL (for Spring Batch)
+- JUnit
